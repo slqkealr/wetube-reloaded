@@ -10,10 +10,9 @@ const app = express();
 const logger = morgan("dev");
 app.use(logger);
 
-
-app.use("/",globalRouter);
-app.use("/users",userRouter);
-app.use("/videos",videoRouter);
+app.use("/", globalRouter);
+app.use("/users", userRouter);
+app.use("/videos", videoRouter);
 
 const handleListening = () =>
   console.log(`✅ Server listenting on port http://localhost:${PORT} 🚀`);
