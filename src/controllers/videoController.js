@@ -14,7 +14,6 @@ export const home = async (req, res) => {
   const videos = await Video.find({});
   return res.render("home", { pageTitle: "Home", videos });
 };
-
 export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
@@ -50,7 +49,6 @@ export const postEdit = async (req, res) => {
 export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "Upload Video" });
 };
-
 export const postUpload = async (req, res) => {
   const { title, description, hashtags } = req.body;
   try {
