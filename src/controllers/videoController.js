@@ -1,15 +1,5 @@
 import Video from "../models/Video";
 
-/*export const home = (req, res) => {
-  Video.find({})
-    .then((videos) => {
-      console.log("videos", videos);
-      return res.render("home", { pageTitle: "Home", videos: videos });
-    })
-    .catch((error) => {
-      console.log("errors", error);
-    });
-};*/
 export const home = async (req, res) => {
   const videos = await Video.find({});
   return res.render("home", { pageTitle: "Home", videos });
@@ -40,9 +30,7 @@ export const postEdit = async (req, res) => {
   await Video.findByIdAndUpdate(id, {
     title,
     description,
-    hashtags: hashtags
-      .split(",")
-      .map((word) => (word.startsWith("#") ? word : `#${word}`)),
+    hashtags: Video.formatHashtags(hashtags),
   });
   return res.redirect(`/videos/${id}`);
 };
@@ -56,7 +44,7 @@ export const postUpload = async (req, res) => {
       title,
       description,
       createdAt: Date.now(),
-      hashtags,
+      hashtags: Video.formatHashtags(hashtags),
     });
     return res.redirect("/");
   } catch (error) {
