@@ -60,10 +60,13 @@ export const deleteVideo = async (req, res) => {
   return res.redirect("/");
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   const { keyword } = req.query;
+  let videos = [];
   if (keyword) {
-    // Search
+    videos = await Video.find({
+      title: keyword,
+    });
   }
   return res.render("search", { pageTitle: "Search" });
 };
