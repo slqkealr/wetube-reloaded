@@ -68,5 +68,5 @@ export const search = async (req, res) => {
       title: keyword,
     });
   }
-  return res.render("search", { pageTitle: "Search" });
+  return res.render("search", { pageTitle: "Search", videos });
 };
